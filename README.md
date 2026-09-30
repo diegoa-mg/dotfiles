@@ -30,7 +30,7 @@ Los archivos marcados como opcionales se omiten si no existen.
 ### Windows
 
 ```powershell
-git clone https://github.com/<usuario>/dotfiles.git $HOME\dotfiles
+git clone https://github.com/diegoa-mg/dotfiles.git $HOME\dotfiles
 cd $HOME\dotfiles
 Unblock-File .\windows\install.ps1
 pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1
@@ -48,7 +48,7 @@ La configuración de Windows Terminal no se instala sola: abre `windows/terminal
 ### Linux (Arch / CachyOS)
 
 ```bash
-git clone https://github.com/<usuario>/dotfiles.git ~/dotfiles
+git clone https://github.com/diegoa-mg/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 chmod +x linux/install.sh
 ./linux/install.sh            # o --skip-packages
