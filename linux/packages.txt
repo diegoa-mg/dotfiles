@@ -1,0 +1,11 @@
+# Paquetes de pacman (Arch / CachyOS)
+zsh
+foot
+git
+starship
+zoxide
+eza
+bat
+lazygit
+neovim
+ttf-jetbrains-mono-nerd

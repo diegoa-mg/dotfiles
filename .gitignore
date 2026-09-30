@@ -1,0 +1,14 @@
+# Respaldos y archivos locales
+*.bak-*
+*.local
+*.local.*
+.env
+secrets*
+
+# Neovim
+shared/nvim/lazy-lock.json
+shared/nvim/plugin/packer_compiled.lua
+
+# SO
+Thumbs.db
+.DS_Store

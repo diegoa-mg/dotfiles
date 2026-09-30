@@ -1,0 +1,13 @@
+// Fragmento para el settings.json de Windows Terminal (Ctrl+Shift+,).
+// Pega "defaults" dentro de la sección "profiles" de tu settings.json.
+// NO reemplaces tu archivo completo: los GUIDs de perfiles cambian en cada PC.
+// Perfil predeterminado: Configuración → Inicio → Perfil predeterminado → PowerShell.
+{
+  "profiles": {
+    "defaults": {
+      "colorScheme": "One Half Dark",
+      "font": {
+        "face": "JetBrainsMono Nerd Font"
+      }
+    }
+	  }

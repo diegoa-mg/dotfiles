@@ -1,0 +1,11 @@
+# IDs de winget (una por línea). Lo que va después de # se ignora.
+Microsoft.PowerShell
+Microsoft.WindowsTerminal
+Git.Git
+Starship.Starship
+ajeetdsouza.zoxide
+eza-community.eza
+sharkdp.bat
+JesseDuffield.lazygit
+Neovim.Neovim
+DEVCOM.JetBrainsMonoNerdFont
