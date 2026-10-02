@@ -19,6 +19,10 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete  # menú de autocomplet
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineKeyHandler -Key RightArrow -Function ForwardChar  # → acepta la sugerencia
+Set-PSReadLineKeyHandler -Chord Ctrl+LeftArrow  -Function BackwardWord
+Set-PSReadLineKeyHandler -Chord Ctrl+RightArrow -Function ForwardWord
+Set-PSReadLineKeyHandler -Chord Ctrl+Backspace  -Function BackwardKillWord
+Set-PSReadLineKeyHandler -Chord Ctrl+Delete     -Function KillWord
 
 # ---------- Quitar alias nativos de PowerShell que chocan con los tuyos ----------
 # En PowerShell los alias tienen prioridad sobre las funciones, así que hay que borrarlos.
