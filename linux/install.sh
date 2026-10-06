@@ -44,7 +44,7 @@ link() {
 step "Instalando configuración"
 link "$ROOT/linux/.zshrc"              "$HOME/.zshrc"
 link "$ROOT/linux/foot/foot.ini"       "$HOME/.config/foot/foot.ini"
-link "$ROOT/shared/starship.toml"      "$HOME/.config/starship.toml"
+# link "$ROOT/shared/starship.toml"      "$HOME/.config/starship.toml"
 link "$ROOT/shared/nvim"               "$HOME/.config/nvim"
 link "$ROOT/shared/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
 link "$ROOT/shared/bat/config"         "$HOME/.config/bat/config"
