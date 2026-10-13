@@ -6,7 +6,7 @@
 secrets*
 
 # Neovim
-shared/nvim/lazy-lock.json
+#shared/nvim/lazy-lock.json
 shared/nvim/plugin/packer_compiled.lua
 
 # SO
