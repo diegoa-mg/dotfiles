@@ -28,6 +28,9 @@ require("lazy").setup({
     config = function() vim.cmd([[colorscheme tokyonight]]) end,
   },
 
+  -- Hace que lua_ls entienda la API de Neovim
+  { "folke/lazydev.nvim", ft = "lua", opts = {} },
+
   -- Barra inferior estética
   { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function() require("lualine").setup() end,
@@ -98,9 +101,10 @@ vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_bg })
 -- Pyright: usar el .venv del proyecto si existe
 vim.lsp.config("pyright", {
   before_init = function(_, config)
-    local python = config.root_dir and (config.root_dir .. "/.venv/bin/python")
+    local bin = vim.fn.has("win32") == 1 and "/.venv/Scripts/python.exe" or "/.venv/bin/python"
+    local python = config.root_dir and (config.root_dir .. bin)
     if python and vim.uv.fs_stat(python) then
-      config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
+        config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
         python = { pythonPath = python },
       })
     end
