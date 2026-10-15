@@ -98,6 +98,7 @@ require("lazy").setup({
     {
         "saghen/blink.cmp",
         version = "1.*",
+        dependencies = { "rafamadriz/friendly-snippets" },
         opts = {
             keymap = { preset = "super-tab" }, -- Tab acepta, como en VS Code
             completion = { documentation = { auto_show = true } },
@@ -126,6 +127,10 @@ require("lazy").setup({
             { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Buscar archivos" },
             { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Buscar texto" },
             { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Buffers" },
+                  { "<leader>fr", "<cmd>Telescope oldfiles<cr>",              desc = "Archivos recientes" },
+            { "<leader>fd", "<cmd>Telescope diagnostics<cr>",           desc = "Errores del proyecto" },
+            { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>",  desc = "Funciones y clases del archivo" },
+            { "<leader>fh", "<cmd>Telescope help_tags<cr>",             desc = "Buscar en la ayuda" },
         },
     },
 
@@ -134,6 +139,33 @@ require("lazy").setup({
 
     -- Git en el margen
     { "lewis6991/gitsigns.nvim", opts = {} },
+
+    -- Cierra y renombra etiquetas JSX/HTML automaticamente
+    { "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} },
+
+    -- Saltar a cualquier parte de la pantalla
+    { "folke/flash.nvim", event = "VeryLazy", opts = {},
+        keys = {
+        { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Saltar (flash)" },
+        },
+    },
+
+    -- Cambiar comillas/paréntesis alrededor de un texto
+    { "kylechui/nvim-surround", version = "*", event = "VeryLazy", opts = {} },
+
+    -- Explorador de archivos como buffer
+    { "stevearc/oil.nvim", dependencies = { "nvim-tree/nvim-web-devicons" },
+        lazy = false, opts = {},
+        keys = { { "-", "<cmd>Oil<cr>", desc = "Explorador de archivos" } },
+    },
+    -- Restaurar sesión (archivos abiertos) por proyecto
+    { "folke/persistence.nvim", event = "BufReadPre", opts = {},
+        keys = {
+        { "<leader>ss", function() require("persistence").load() end,                desc = "Restaurar sesión" },
+        { "<leader>sl", function() require("persistence").load({ last = true }) end, desc = "Última sesión" },
+        { "<leader>sd", function() require("persistence").stop() end,                desc = "No guardar esta sesión" },
+        },
+    },
 })
 
 -- ==========================================
