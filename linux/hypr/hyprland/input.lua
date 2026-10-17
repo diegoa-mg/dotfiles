@@ -25,6 +25,6 @@ hl.config({
     },
 
     cursor = {
-        hotspot_padding = 1,
+        hotspot_padding = 0,
     },
 })
