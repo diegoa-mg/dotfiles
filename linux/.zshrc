@@ -107,10 +107,10 @@ source $ZSH/oh-my-zsh.sh
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-autocomplete)
 source $ZSH/oh-my-zsh.sh
 
-if [[ -z "$CAELESTIA_COLORS_LOADED" ]]; then
-    export CAELESTIA_COLORS_LOADED=1
-    [[ -r ~/.local/state/caelestia/sequences.txt ]] && \
-        cat ~/.local/state/caelestia/sequences.txt
+if [[ -z "$TERMINAL_COLORS_LOADED" ]]; then
+    export TERMINAL_COLORS_LOADED=1
+    [[ -r ~/dotfiles/linux/terminal-colors.txt ]] && \
+        cat ~/dotfiles/linux/terminal-colors.txt
 fi
 
 eval "$(starship init zsh)"
@@ -215,8 +215,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Bienvenida caelestia
-caelestia_greeting() {
+# Bienvenida
+greeting() {
     print -P "%F{16}"
     command cat <<'EOF'
            ________               __ 
@@ -233,9 +233,10 @@ EOF
 
 # Iniciar con fastfetch
 if [[ -o interactive ]]; then
-    caelestia_greeting
+    greeting
 fi
 
 
 # Added by Antigravity CLI installer
 export PATH="/home/diego/.local/bin:$PATH"
+alias z80ide="WINEPREFIX=$HOME/.wine-z80 wine explorer /desktop=z80,1366x768 '/home/diego/.local/share/z80ide/z80simulatoride.exe'"
