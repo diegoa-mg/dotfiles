@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Instala la configuración de terminal en Linux (probado pensando en Arch/CachyOS).
+# Instala la configuración de Linux (terminal, Hyprland y DMS) (probado pensando en Arch/CachyOS).
 # Uso: ./linux/install.sh [--skip-packages]
 set -euo pipefail
 
@@ -48,6 +48,9 @@ link "$ROOT/linux/foot/foot.ini"       "$HOME/.config/foot/foot.ini"
 link "$ROOT/shared/nvim"               "$HOME/.config/nvim"
 link "$ROOT/shared/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
 link "$ROOT/shared/bat/config"         "$HOME/.config/bat/config"
+link "$ROOT/linux/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+link "$ROOT/linux/hypr"                "$HOME/.config/hypr"
+link "$ROOT/linux/DankMaterialShell/settings.json" "$HOME/.config/DankMaterialShell/settings.json"
 
 # --- 3. Shell por defecto -----------------------------------------------------
 if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh >/dev/null; then

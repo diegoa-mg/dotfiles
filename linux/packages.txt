@@ -1,4 +1,6 @@
 # Paquetes de pacman (Arch / CachyOS)
+
+# Terminal
 zsh
 foot
 git
@@ -8,4 +10,16 @@ eza
 bat
 lazygit
 neovim
+fastfetch
+btop
 ttf-jetbrains-mono-nerd
+
+# Hyprland (el shell DMS se instala aparte, ver README)
+hyprland
+hyprpicker
+grim
+slurp
+wl-clipboard
+cliphist
+gammastep
+brightnessctl

@@ -1,6 +1,6 @@
 # dotfiles
 
-Mi configuración de terminal para **Windows** (Windows Terminal + PowerShell 7) y **Linux** (foot + zsh + Oh My Zsh), con Starship, zoxide, eza, bat, lazygit, Neovim y JetBrains Mono Nerd Font.
+Mi configuración para **Windows** (Windows Terminal + PowerShell 7) y **Linux** (CachyOS con Hyprland + DankMaterialShell, foot, zsh + Oh My Zsh), con Starship, zoxide, eza, bat, lazygit, Neovim, fastfetch y JetBrains Mono Nerd Font.
 
 ## Estructura
 
@@ -8,7 +8,7 @@ Mi configuración de terminal para **Windows** (Windows Terminal + PowerShell 7)
 dotfiles/
 ├── shared/                  # Igual en ambos sistemas
 │   ├── starship.toml
-│   ├── nvim/                # (opcional)
+│   ├── nvim/
 │   ├── lazygit/config.yml   # (opcional)
 │   └── bat/config           # (opcional)
 ├── windows/
@@ -20,7 +20,18 @@ dotfiles/
     ├── install.sh
     ├── packages.txt         # paquetes de pacman
     ├── .zshrc
-    └── foot/foot.ini
+    ├── terminal-colors.txt  # paleta de la terminal (se imprime al abrir foot)
+    ├── foot/foot.ini
+    ├── fastfetch/config.jsonc
+    ├── DankMaterialShell/settings.json   # ajustes de DMS (dock, barra, tema)
+    └── hypr/                # configuración de Hyprland (Lua)
+        ├── hyprland.lua     # punto de entrada
+        ├── hyprland/        # keybinds, reglas, animaciones, input, etc.
+        ├── dms/             # archivos que genera/usa DMS
+        ├── scheme/          # colores base de Hyprland
+        ├── variables.lua
+        ├── hypr-vars.lua    # overrides de variables (cursor, etc.)
+        └── hypr-user.lua    # extras propios
 ```
 
 Los archivos marcados como opcionales se omiten si no existen.
@@ -53,6 +64,10 @@ cd ~/dotfiles
 chmod +x linux/install.sh
 ./linux/install.sh            # o --skip-packages
 ```
+
+El script instala los paquetes y enlaza `.zshrc`, foot, fastfetch, Neovim, Hyprland y los ajustes de DMS. **DankMaterialShell no está en `packages.txt`**: instálalo aparte siguiendo su documentación (en CachyOS suele estar en el AUR) y después inicia sesión en Hyprland; la config lo arranca con `dms run`.
+
+Los atajos de teclado viven en `linux/hypr/hyprland/keybinds.lua` y casi todos llaman a DMS con `dms ipc call ...`.
 
 ## Cómo funciona
 
