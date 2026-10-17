@@ -1,84 +1,73 @@
 local vars = require("variables")
 local fn   = require("hyprland.functions")
-local shell = require("shell_choice")
 
-if shell == "dms" then
-    local function dms(cmd) return hl.dsp.exec_cmd("dms ipc call " .. cmd) end
+local function dms(cmd) return hl.dsp.exec_cmd("dms ipc call " .. cmd) end
 
-    -- Launcher
-    hl.bind("SUPER + SUPER_L", dms("spotlight toggle"), { release = true })
+-- Alterna un workspace especial con una app: si la app no existe, la abre oculta en ese workspace
+local function toggle_app(special, class, cmd)
+    return function()
+        local found = false
+        for _, w in pairs(hl.get_windows()) do
+            if w.class == class then
+                found = true
+                break
+            end
+        end
+        if found then
+            hl.dispatch(hl.dsp.workspace.toggle_special(special))
+        else
+            hl.dispatch(hl.dsp.exec_cmd(cmd, { workspace = "special:" .. special .. " silent" }))
+        end
+    end
+end
 
-    -- Misc
-    hl.bind(vars.kbSession, dms("powermenu toggle"))
-    hl.bind(vars.kbShowSidebar, dms("notifications toggle"))
-    hl.bind(vars.kbClearNotifs, dms("notifications clearAll"), { locked = true })
-    hl.bind(vars.kbShowPanels, dms("control-center toggle"))
-    hl.bind(vars.kbLock, dms("lock lock"))
+---------------
+---- DMS ----
+---------------
 
-    -- Restore lock (levanta DMS solo si no está corriendo)
-    hl.bind(vars.kbRestoreLock, function()
-        hl.dispatch(hl.dsp.exec_cmd("pgrep -f 'dms run' >/dev/null || dms run"))
-        hl.dispatch(dms("lock lock"))
-    end)
-
-    -- Brightness
-    hl.bind("XF86MonBrightnessUp", dms('brightness increment 5 ""'), { locked = true })
-    hl.bind("XF86MonBrightnessDown", dms('brightness decrement 5 ""'), { locked = true })
-
-    -- Media
-    hl.bind("CTRL + SUPER + M", dms("mpris playPause"), { locked = true })
-    hl.bind("XF86AudioPlay", dms("mpris playPause"), { locked = true })
-    hl.bind("XF86AudioPause", dms("mpris playPause"), { locked = true })
-    hl.bind("CTRL + SUPER + Equal", dms("mpris next"), { locked = true })
-    hl.bind("XF86AudioNext", dms("mpris next"), { locked = true })
-    hl.bind("CTRL + SUPER + Minus", dms("mpris previous"), { locked = true })
-    hl.bind("XF86AudioPrev", dms("mpris previous"), { locked = true })
-    hl.bind("XF86AudioStop", dms("mpris stop"), { locked = true })
-
-    -- Kill/restart
-    hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("dms kill"), { release = true })
-    hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("dms restart"), { release = true })
-
-else
 -- Launcher
-hl.bind("SUPER + SUPER_L", hl.dsp.global("caelestia:launcher"), { release = true })
+hl.bind("SUPER + SUPER_L", dms("spotlight toggle"), { release = true })
 
 -- Misc
-hl.bind(vars.kbSession, hl.dsp.global("caelestia:session"))
-hl.bind(vars.kbShowSidebar, hl.dsp.global("caelestia:sidebar"))
-hl.bind(vars.kbClearNotifs, hl.dsp.global("caelestia:clearNotifs"), { locked = true })
-hl.bind(vars.kbShowPanels, hl.dsp.global("caelestia:showall"))
-hl.bind(vars.kbLock, hl.dsp.global("caelestia:lock"))
+hl.bind(vars.kbSession, dms("powermenu toggle"))
+hl.bind(vars.kbShowSidebar, dms("notifications toggle"))
+hl.bind(vars.kbClearNotifs, dms("notifications clearAll"), { locked = true })
+hl.bind(vars.kbShowPanels, dms("control-center toggle"))
+hl.bind(vars.kbLock, dms("lock lock"))
 
--- Restore lock
+-- Restore lock (levanta DMS solo si no está corriendo)
 hl.bind(vars.kbRestoreLock, function()
-hl.dispatch(hl.dsp.exec_cmd("caelestia shell -d"))
-hl.dispatch(hl.dsp.global("caelestia:lock"))
+    hl.dispatch(hl.dsp.exec_cmd("pgrep -f 'dms run' >/dev/null || dms run"))
+    hl.dispatch(dms("lock lock"))
 end)
 
 -- Brightness
-hl.bind("XF86MonBrightnessUp", hl.dsp.global("caelestia:brightnessUp"), { locked = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.global("caelestia:brightnessDown"), { locked = true })
+hl.bind("XF86MonBrightnessUp", dms('brightness increment 5 ""'), { locked = true })
+hl.bind("XF86MonBrightnessDown", dms('brightness decrement 5 ""'), { locked = true })
 
 -- Media
--- hl.bind("CTRL + SUPER + Space", hl.dsp.global("caelestia:mediaToggle"), { locked = true })
-hl.bind("CTRL + SUPER + M", hl.dsp.global("caelestia:mediaToggle"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.global("caelestia:mediaToggle"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.global("caelestia:mediaToggle"), { locked = true })
-hl.bind("CTRL + SUPER + Equal", hl.dsp.global("caelestia:mediaNext"), { locked = true })
-hl.bind("XF86AudioNext", hl.dsp.global("caelestia:mediaNext"), { locked = true })
-hl.bind("CTRL + SUPER + Minus", hl.dsp.global("caelestia:mediaPrev"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.global("caelestia:mediaPrev"), { locked = true })
-hl.bind("XF86AudioStop", hl.dsp.global("caelestia:mediaStop"), { locked = true })
+hl.bind("CTRL + SUPER + M", dms("mpris playPause"), { locked = true })
+hl.bind("XF86AudioPlay", dms("mpris playPause"), { locked = true })
+hl.bind("XF86AudioPause", dms("mpris playPause"), { locked = true })
+hl.bind("CTRL + SUPER + Equal", dms("mpris next"), { locked = true })
+hl.bind("XF86AudioNext", dms("mpris next"), { locked = true })
+hl.bind("CTRL + SUPER + Minus", dms("mpris previous"), { locked = true })
+hl.bind("XF86AudioPrev", dms("mpris previous"), { locked = true })
+hl.bind("XF86AudioStop", dms("mpris stop"), { locked = true })
 
 -- Kill/restart
-hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("qs -c caelestia kill"), { release = true })
-hl.bind(
-    "CTRL + SUPER + ALT + R",
-    hl.dsp.exec_cmd("qs -c caelestia kill; sleep .1; caelestia shell -d"),
-    { release = true }
-)
-end
+hl.bind("CTRL + SUPER + SHIFT + R", hl.dsp.exec_cmd("dms kill"), { release = true })
+hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("dms restart"), { release = true })
+
+-- Portapapeles (historial de DMS)
+hl.bind("SUPER + V", dms("clipboard toggle"))
+
+-- Captura por área (herramienta de DMS)
+hl.bind("SUPER + SHIFT + ALT + S", dms("screenshot begin"))
+
+-----------------------
+---- WORKSPACES ----
+-----------------------
 
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
@@ -183,12 +172,10 @@ hl.bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maxi
 hl.bind(vars.kbToggleWindowFloating, hl.dsp.window.float())
 hl.bind(vars.kbCloseWindow, hl.dsp.window.close())
 
--- Special workspace toggles
-hl.bind(vars.kbSpecialWs, hl.dsp.exec_cmd("caelestia toggle specialws"))
-hl.bind(vars.kbSystemMonitorWs, hl.dsp.exec_cmd("caelestia toggle sysmon"))
--- hl.bind(vars.kbMusicWs, hl.dsp.exec_cmd("caelestia toggle music"))
-hl.bind(vars.kbCommunicationWs, hl.dsp.exec_cmd("caelestia toggle communication"))
-hl.bind(vars.kbTodoWs, hl.dsp.exec_cmd("caelestia toggle todo"))
+-- Special workspace toggles (nativos, sin caelestia-cli)
+hl.bind(vars.kbSpecialWs, hl.dsp.workspace.toggle_special("special"))
+hl.bind(vars.kbSystemMonitorWs, toggle_app("sysmon", "btop", "foot -a btop -T btop btop"))
+hl.bind(vars.kbCommunicationWs, toggle_app("communication", "discord", "discord"))
 
 -- Apps
 hl.bind(vars.kbTerminal, hl.dsp.exec_cmd(vars.terminal))
@@ -198,18 +185,10 @@ hl.bind(vars.kbFileExplorer, hl.dsp.exec_cmd(vars.fileExplorer))
 hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd(vars.audioSettings))
 
 -- Utilities
--- hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot"), { locked = true })
--- Modificacion: copia la imagen automaticamente
-hl.bind("Print", hl.dsp.exec_cmd("caelestia screenshot | wl-copy && notify-send 'Screenshot' 'Copiada al portapapeles'"), { locked = true })
---hl.bind("SUPER + SHIFT + S", hl.dsp.global("caelestia:screenshotFreeze"))
--- Modificacion 1: copia la imagen automaticamente (no permite seleccionar ventana)
--- hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
--- Modificacion 2: permite seleccionar ventana
+-- Captura de pantalla completa: copia la imagen automaticamente
+hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy && notify-send 'Screenshot' 'Copiada al portapapeles'"), { locked = true })
+-- Captura con seleccion de ventana o area: copia la imagen automaticamente
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("CHOICE=$(hyprctl clients -j | jq -r '.[] | select(.workspace.id == '$(hyprctl activeworkspace -j | jq '.id')') | .at[0],.at[1],.size[0],.size[1]' | awk 'NR%4==1{x=$0} NR%4==2{y=$0} NR%4==3{w=$0} NR%4==0{print x\",\"y\" \"w\"x\"$0}' | slurp); [ -n \"$CHOICE\" ] && grim -g \"$CHOICE\" - | wl-copy && notify-send 'Screenshot' 'Copiada al portapapeles'"))
-hl.bind("SUPER + SHIFT + ALT + S", hl.dsp.global("caelestia:screenshot"))
-hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd("caelestia record -s"))
-hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd("caelestia record"))
-hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd("caelestia record -r"))
 hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- Volume
@@ -233,30 +212,17 @@ hl.bind(
 )
 
 -- Sleep
+-- OJO: SUPER + SHIFT + L tambien esta asignado a "mover ventana a la derecha" (arriba)
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd(vars.sleepGestureCmd), { locked = true })
 
--- Clipboard and emoji picker
-hl.bind("SUPER + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard"))
-hl.bind("SUPER + ALT + V", hl.dsp.exec_cmd("pkill fuzzel || caelestia clipboard -d"))
-hl.bind("SUPER + Period", hl.dsp.exec_cmd("pkill fuzzel || caelestia emoji -p"))
+-- Pegar el ultimo elemento del portapapeles escribiendolo
 hl.bind(
     "CTRL + SHIFT + ALT + V",
     hl.dsp.exec_cmd('sleep 0.5s && ydotool type -d 1 "$(cliphist list | head -1 | cliphist decode)"'),
     { locked = true }
 )
--- hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -p 'Portapapeles' | cliphist decode | wl-copy"
 -- Vaciar portapapeles
 hl.bind("SUPER + ALT + X", hl.dsp.exec_cmd("cliphist wipe && rm -f ~/.cache/cliphist/db && notify-send 'Portapapeles' 'Historial completamente vaciado'"))
-
--- Testing
-hl.bind(
-    "SUPER + ALT + F12",
-    hl.dsp.exec_cmd(
-        "notify-send -u low -i dialog-information-symbolic 'Test notification' " ..
-        [["Here's a really long message to test truncation and wrapping\nYou can middle click or flick this notification to dismiss it!"]] ..
-        " -a 'Shell' -A 'Test1=I got it!' -A 'Test2=Another action'"
-    )
-)
 
 -- Switch language
 hl.bind("CTRL + SUPER + space", hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))

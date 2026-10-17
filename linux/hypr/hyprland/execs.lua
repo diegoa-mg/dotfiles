@@ -26,13 +26,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("mpris-proxy")
 
     -- Start shell
-    --hl.exec_cmd("caelestia shell -d")
-    
-    if require("shell_choice") == "dms" then
-        hl.exec_cmd("dms run")
-    else
-        hl.exec_cmd("caelestia shell -d")
-    end
+    hl.exec_cmd("dms run")
 end)
 
 -- Resizer listener
