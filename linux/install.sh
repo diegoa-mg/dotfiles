@@ -50,7 +50,7 @@ link "$ROOT/shared/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
 link "$ROOT/shared/bat/config"         "$HOME/.config/bat/config"
 link "$ROOT/linux/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 link "$ROOT/linux/hypr"                "$HOME/.config/hypr"
-link "$ROOT/linux/DankMaterialShell/settings.json" "$HOME/.config/DankMaterialShell/settings.json"
+link "$ROOT/linux/dms/settings.json" "$HOME/.config/dms/settings.json"
 
 # --- 3. Shell por defecto -----------------------------------------------------
 if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh >/dev/null; then
