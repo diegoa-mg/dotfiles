@@ -1,6 +1,6 @@
 # dotfiles
 
-Mi configuración para **Windows** (Windows Terminal + PowerShell 7) y **Linux** (CachyOS con Hyprland + DankMaterialShell, foot, zsh + Oh My Zsh), con Starship, zoxide, eza, bat, lazygit, Neovim, fastfetch y JetBrains Mono Nerd Font.
+Mi configuración para **Windows** (Windows Terminal + PowerShell 7) y **Linux** (CachyOS con Hyprland + Dux Shell, foot, zsh + Oh My Zsh), con Starship, zoxide, eza, bat, lazygit, Neovim, fastfetch y JetBrains Mono Nerd Font.
 
 ## Estructura
 
@@ -23,7 +23,7 @@ dotfiles/
     ├── terminal-colors.txt  # paleta de la terminal (se imprime al abrir foot)
     ├── foot/foot.ini
     ├── fastfetch/config.jsonc
-    ├── DankMaterialShell/settings.json   # ajustes de DMS (dock, barra, tema)
+    ├── dms/settings.json   # ajustes de DMS (dock, barra, tema)
     └── hypr/                # configuración de Hyprland (Lua)
         ├── hyprland.lua     # punto de entrada
         ├── hyprland/        # keybinds, reglas, animaciones, input, etc.
@@ -65,7 +65,7 @@ chmod +x linux/install.sh
 ./linux/install.sh            # o --skip-packages
 ```
 
-El script instala los paquetes y enlaza `.zshrc`, foot, fastfetch, Neovim, Hyprland y los ajustes de DMS. **DankMaterialShell no está en `packages.txt`**: instálalo aparte siguiendo su documentación (en CachyOS suele estar en el AUR) y después inicia sesión en Hyprland; la config lo arranca con `dms run`.
+El script instala los paquetes y enlaza `.zshrc`, foot, fastfetch, Neovim, Hyprland y los ajustes de DMS. **Dux Shell no está en `packages.txt`**: instálalo aparte siguiendo su documentación (en CachyOS suele estar en el AUR) y después inicia sesión en Hyprland; la config lo arranca con `dms run`.
 
 Los atajos de teclado viven en `linux/hypr/hyprland/keybinds.lua` y casi todos llaman a DMS con `dms ipc call ...`.
 
