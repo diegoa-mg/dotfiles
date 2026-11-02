@@ -12,3 +12,5 @@ shared/nvim/plugin/packer_compiled.lua
 # SO
 Thumbs.db
 .DS_Store
+*.bak*
+*.backup*

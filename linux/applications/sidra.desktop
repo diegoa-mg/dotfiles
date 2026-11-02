@@ -1,0 +1,32 @@
+[Desktop Entry]
+Name=Apple Music
+Exec=/usr/bin/sidra %U
+Terminal=false
+Type=Application
+Icon=/home/diego/.local/share/icons/apple-music.png
+StartupWMClass=Sidra
+X-AppImage-Version=1.1.2
+Actions=PlayPause;Next;Previous;Stop;
+MimeType=x-scheme-handler/itms;
+Comment=An elegant Apple Music desktop client for Linux, macOS and Windows. No frippery, just quality. A better class of Cider 🍎
+Categories=Audio;
+
+[Desktop Action PlayPause]
+Name=Apple Music
+Name[de]=Abspielen-Pausieren
+Exec=/usr/bin/sidra %U
+
+[Desktop Action Next]
+Name=Apple Music
+Name[de]=Nächstes
+Exec=/usr/bin/sidra %U
+
+[Desktop Action Previous]
+Name=Apple Music
+Name[de]=Vorheriges
+Exec=/usr/bin/sidra %U
+
+[Desktop Action Stop]
+Name=Apple Music
+Name[de]=Stop
+Exec=/usr/bin/sidra %U

@@ -57,12 +57,12 @@ hl.monitor({
     scale    = 1.20,
 })
 
-hl.monitor({
-    output   = "HDMI-A-2",
-    mode     = "2560x1440@120.00",
-    position = "1600x0",
-    scale    = 1.25,
-})
+--hl.monitor({
+    --output   = "HDMI-A-2",
+    --mode     = "2560x1440@120.00",
+    --position = "1600x0",
+    --scale    = 1.25,
+--})
 hl.monitor({
 	output   = "eDP-1",
 	mode     = "preferred",
@@ -89,3 +89,4 @@ require("hypr-user")
 
 -- DMS Include Configs
 require("dms.layout")
+require("dms.outputs")

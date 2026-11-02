@@ -26,7 +26,7 @@ end
 ---------------
 
 -- Launcher
-hl.bind("SUPER + SUPER_L", dms("spotlight toggle"), { release = true })
+hl.bind("SUPER + space", dms("spotlight toggle"))
 
 -- Misc
 hl.bind(vars.kbSession, dms("powermenu toggle"))
@@ -62,8 +62,8 @@ hl.bind("CTRL + SUPER + ALT + R", hl.dsp.exec_cmd("dms restart"), { release = tr
 -- Portapapeles (historial de DMS)
 hl.bind("SUPER + V", dms("clipboard toggle"))
 
--- Captura por área (herramienta de DMS)
-hl.bind("SUPER + SHIFT + ALT + S", dms("screenshot begin"))
+-- Captura de la ventana enfocada (DMS)
+hl.bind("SUPER + SHIFT + ALT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh window"))
 
 -----------------------
 ---- WORKSPACES ----
@@ -115,7 +115,7 @@ hl.bind("CTRL + ALT + Tab", hl.dsp.group.next(), { repeating = true })
 hl.bind("CTRL + SHIFT + ALT + Tab", hl.dsp.group.prev(), { repeating = true })
 hl.bind(vars.kbToggleGroup, hl.dsp.group.toggle())
 hl.bind(vars.kbUngroup, hl.dsp.window.move({ out_of_group = true }))
-hl.bind("SUPER + SHIFT + Comma", hl.dsp.group.lock_active())
+hl.bind("SUPER + SHIFT + Comma", hl.dsp.group.lock())
 
 -- Window actions
 -- hl.bind("SUPER + left", hl.dsp.focus({ direction = "left" }))
@@ -172,7 +172,7 @@ hl.bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maxi
 hl.bind(vars.kbToggleWindowFloating, hl.dsp.window.float())
 hl.bind(vars.kbCloseWindow, hl.dsp.window.close())
 
--- Special workspace toggles (nativos)
+-- Special workspace toggles (nativos, sin caelestia-cli)
 hl.bind(vars.kbSpecialWs, hl.dsp.workspace.toggle_special("special"))
 hl.bind(vars.kbSystemMonitorWs, toggle_app("sysmon", "btop", "foot -a btop -T btop btop"))
 hl.bind(vars.kbCommunicationWs, toggle_app("communication", "discord", "discord"))
@@ -185,10 +185,10 @@ hl.bind(vars.kbFileExplorer, hl.dsp.exec_cmd(vars.fileExplorer))
 hl.bind("CTRL + ALT + V", hl.dsp.exec_cmd(vars.audioSettings))
 
 -- Utilities
--- Captura de pantalla completa: copia la imagen automaticamente
-hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy && notify-send 'Screenshot' 'Copiada al portapapeles'"), { locked = true })
--- Captura con seleccion de ventana o area: copia la imagen automaticamente
-hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("CHOICE=$(hyprctl clients -j | jq -r '.[] | select(.workspace.id == '$(hyprctl activeworkspace -j | jq '.id')') | .at[0],.at[1],.size[0],.size[1]' | awk 'NR%4==1{x=$0} NR%4==2{y=$0} NR%4==3{w=$0} NR%4==0{print x\",\"y\" \"w\"x\"$0}' | slurp); [ -n \"$CHOICE\" ] && grim -g \"$CHOICE\" - | wl-copy && notify-send 'Screenshot' 'Copiada al portapapeles'"))
+-- Capturas con DMS: Print = pantalla completa, SUPER+SHIFT+S = región
+hl.bind("Print", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh full"), { locked = true })
+-- (región con selector de DMS)
+hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/screenshot.sh region"))
 hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- Volume
@@ -245,3 +245,6 @@ end)
 
 -- Open school calendar
 hl.bind("SUPER + Y", hl.dsp.exec_cmd("imv '/home/diego/Pictures/calendario_tercero.jpg'"))
+
+-- Alternar split vertical/horizontal (dwindle)
+hl.bind("SUPER + O", hl.dsp.layout("togglesplit"))

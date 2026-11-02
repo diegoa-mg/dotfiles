@@ -51,6 +51,10 @@ link "$ROOT/shared/bat/config"         "$HOME/.config/bat/config"
 link "$ROOT/linux/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
 link "$ROOT/linux/hypr"                "$HOME/.config/hypr"
 link "$ROOT/linux/dms/settings.json" "$HOME/.config/dms/settings.json"
+link "$ROOT/linux/gtk-3.0/settings.ini" "$HOME/.config/gtk-3.0/settings.ini"
+link "$ROOT/linux/gtk-4.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"
+link "$ROOT/linux/applications/sidra.desktop" "$HOME/.local/share/applications/sidra.desktop"
+link "$ROOT/linux/icons/apple-music.png" "$HOME/.local/share/icons/apple-music.png"
 
 # --- 3. Shell por defecto -----------------------------------------------------
 if [[ "$(basename "${SHELL:-}")" != "zsh" ]] && command -v zsh >/dev/null; then
