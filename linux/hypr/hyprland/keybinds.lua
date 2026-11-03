@@ -172,7 +172,7 @@ hl.bind(vars.kbWindowBorderedFullscreen, hl.dsp.window.fullscreen({ mode = "maxi
 hl.bind(vars.kbToggleWindowFloating, hl.dsp.window.float())
 hl.bind(vars.kbCloseWindow, hl.dsp.window.close())
 
--- Special workspace toggles (nativos, sin caelestia-cli)
+-- Special workspace toggles (nativos)
 hl.bind(vars.kbSpecialWs, hl.dsp.workspace.toggle_special("special"))
 hl.bind(vars.kbSystemMonitorWs, toggle_app("sysmon", "btop", "foot -a btop -T btop btop"))
 hl.bind(vars.kbCommunicationWs, toggle_app("communication", "discord", "discord"))

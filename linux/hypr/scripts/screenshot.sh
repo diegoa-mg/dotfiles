@@ -10,4 +10,4 @@ esac
 f=$(dms screenshot "${args[@]}" --no-notify | tail -n1)
 [ -f "$f" ] || exit 0   # cancelado: no notificar
 
-notify-send -t 1500 -a Captura -i "$f" -h "string:image-path:$f" "$title" "Copiada y guardada"
+notify-send -t 1500 -a Captura -h "string:image-path:$f" "$title" "Copiada y guardada"
