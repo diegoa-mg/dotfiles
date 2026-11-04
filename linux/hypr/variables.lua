@@ -90,6 +90,7 @@ return {
     kbMusicWs                  = "SUPER + M",
     kbCommunicationWs          = "SUPER + D",
     kbTodoWs                   = "SUPER + R",
+    kbWhatsappWs               = "SUPER + SHIFT + W",
 
     -- Apps
     kbTerminal                 = "SUPER + T",

@@ -176,6 +176,7 @@ hl.bind(vars.kbCloseWindow, hl.dsp.window.close())
 hl.bind(vars.kbSpecialWs, hl.dsp.workspace.toggle_special("special"))
 hl.bind(vars.kbSystemMonitorWs, toggle_app("sysmon", "btop", "foot -a btop -T btop btop"))
 hl.bind(vars.kbCommunicationWs, toggle_app("communication", "discord", "discord"))
+hl.bind(vars.kbWhatsappWs, toggle_app("whatsapp", "com.rtosta.zapzap", "flatpak run com.rtosta.zapzap"))
 
 -- Apps
 hl.bind(vars.kbTerminal, hl.dsp.exec_cmd(vars.terminal))
@@ -214,15 +215,6 @@ hl.bind(
 -- Sleep
 -- OJO: SUPER + SHIFT + L tambien esta asignado a "mover ventana a la derecha" (arriba)
 hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd(vars.sleepGestureCmd), { locked = true })
-
--- Pegar el ultimo elemento del portapapeles escribiendolo
-hl.bind(
-    "CTRL + SHIFT + ALT + V",
-    hl.dsp.exec_cmd('sleep 0.5s && ydotool type -d 1 "$(cliphist list | head -1 | cliphist decode)"'),
-    { locked = true }
-)
--- Vaciar portapapeles
-hl.bind("SUPER + ALT + X", hl.dsp.exec_cmd("cliphist wipe && rm -f ~/.cache/cliphist/db && notify-send 'Portapapeles' 'Historial completamente vaciado'"))
 
 -- Switch language
 hl.bind("CTRL + SUPER + space", hl.dsp.exec_cmd("hyprctl switchxkblayout current next"))
